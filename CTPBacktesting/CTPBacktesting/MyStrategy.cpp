@@ -6,68 +6,7 @@ using namespace std;
 
 //根据实时行情进行交易
 void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
-	/*
-	cout << "Time: " << setw(25) << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time
-		<< " InstrumentID: " << InstrumentID
-		<< " Last Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].close
-		<< endl;
-		*/
-	if (InstrumentID != "rb1801")
-		return;
-	count++;
-	if (count % 10 != 0)	//每10组行情交一次
-		return;
-	//测试报撤单
-	/*
-	if (pos == 0) {
-		cout << "Buy rb1801 contract!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.price = market_data[InstrumentID][market_data[InstrumentID].size() - 1].lower_limit;
-		cout << "Open price is: " << new_order.price << endl;
-		new_order.direction = BID;				//买
-		new_order.type = TYPE_OPEN;				//开仓
-		new_order.order_type = ORDER_COMMIT;	//报单
-		new_order.volume = 1;					//数量
-		CommitOrder(new_order);				
-		pos = 1;
-	}
-	else if (pos = 1) {		//测试撤单
-		cout << "Cancel current order!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.order_type = ORDER_CANCEL;
-		CancelOrder(new_order);
-		pos = 0;
-	}
-	*/
-	//测试成交
-	if (pos == 0) {
-		cout << "Buy rb1801 contract!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.price = market_data[InstrumentID][market_data[InstrumentID].size() - 1].ask1;
-		cout << "Open price is: " << new_order.price << endl;
-		new_order.direction = BID;				//买
-		new_order.type = TYPE_OPEN;				//开仓
-		new_order.order_type = ORDER_COMMIT;	//报单
-		new_order.volume = 1;
-		CommitOrder(new_order);
-		pos = 1;
-	}
-	else if (pos == 1) {	//测试报单
-		cout << "Sell rb1801 contract!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.price = market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1;
-		new_order.direction = ASK;				//卖
-		//new_order.type = TYPE_OPEN;			//开仓
-		new_order.type = TYPE_TCLOSE;			//平仓
-		new_order.order_type = ORDER_COMMIT;	//报单
-		new_order.volume = 1;
-		CommitOrder(new_order);
-		pos = 0;
-	}
+	cout << "InstrumentID is：" << InstrumentID << " Market time: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time << endl;
 
 }
 

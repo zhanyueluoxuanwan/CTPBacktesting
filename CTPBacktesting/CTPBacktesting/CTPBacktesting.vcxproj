@@ -142,6 +142,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\CTPBacktesting\CTPBacktesting\CTPBacktesting;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,10 +167,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mysql lib\libmysql.dll" />
+    <None Include="libmysql.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Mysql lib\libmysql.lib" />
+    <Library Include="libmysql.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

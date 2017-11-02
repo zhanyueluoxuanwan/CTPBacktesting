@@ -13,8 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\Mysql lib">
-      <UniqueIdentifier>{adddaadf-2d66-449c-ac2b-345612f7c314}</UniqueIdentifier>
+    <Filter Include="mysql">
+      <UniqueIdentifier>{97f35072-96e6-48a0-a120-b8ca39f38445}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,13 +58,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mysql lib\libmysql.dll">
-      <Filter>头文件\Mysql lib</Filter>
+    <None Include="libmysql.dll">
+      <Filter>mysql</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Mysql lib\libmysql.lib">
-      <Filter>头文件\Mysql lib</Filter>
+    <Library Include="libmysql.lib">
+      <Filter>mysql</Filter>
     </Library>
   </ItemGroup>
 </Project>

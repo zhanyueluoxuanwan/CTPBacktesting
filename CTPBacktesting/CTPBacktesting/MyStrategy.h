@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "TraderInfo.h"
 #include <iostream>
+#include <string>
 #include <map>
 #include <vector>
 using namespace std;

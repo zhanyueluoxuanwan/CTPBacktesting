@@ -18,4 +18,11 @@ private:
 	MyStrategy *my_strategy;					//策略实例，此处可以进行拓展
 	map<string, vector<FT_DATA>> market_data;	//行情信息
 	vector<string> instrument_array;			//订阅的行情
+	
+	//数据库链接信息
+	string user;
+	string pswd;
+	string host;
+	string database;
+	string table;
 };

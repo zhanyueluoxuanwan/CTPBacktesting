@@ -64,6 +64,7 @@ extern volatile int order_request;
 //现在只包含了盘口信息，以后会更新五档盘口信息
 typedef struct {
 	string id;
+	long date;
 	string time;
 	double open;
 	double high;
@@ -74,7 +75,7 @@ typedef struct {
 	double askvol1;
 	double bidvol1;
 	double vol;			//成交量
-	double interest;	//成交额
+	double turnover;	//成交额
 	double holding;		//持仓
 	double upper_limit;	//涨停价
 	double lower_limit;	//跌停价
