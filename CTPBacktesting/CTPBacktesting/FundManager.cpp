@@ -14,7 +14,7 @@ FundManager::FundManager() {
 		for (int line = 0; line < instrumentNum; line++) {
 			string instrument;
 			getline(instrumentFile, instrument);
-			net_pos.insert(make_pair(instrument, 0));
+			net_pos.insert(make_pair(instrument, vector<int>()));
 			cout << "Current instrument is: " << instrument << endl;
 		}
 	}
@@ -63,3 +63,15 @@ FundManager::FundManager() {
 FundManager::~FundManager() {
 
 }
+
+//计算成交中的账户权益
+//按照分笔成交原子计算
+void FundManager::InTradeEquity(MyTrade *trade) {
+
+}
+
+//按照市价计算损益
+void FundManager::InMarketEquity(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
+
+}
+

@@ -34,9 +34,10 @@ DBReader::DBReader() {
 		cout << "Failed to connect future database!" << endl;
 }
 
-void DBReader::Register(MyStrategy *strategy, Dealer *dealer) {
+void DBReader::Register(MyStrategy *strategy, Dealer *dealer, FundManager *fm) {
 	my_strategy = strategy;
 	my_dealer = dealer;
+	my_fm = fm;
 }
 
 //回播行情数据，第一版先考虑单合约，后期再考虑时间对齐
@@ -111,6 +112,8 @@ void DBReader::PlayMarketData() {
 		my_dealer->Strike(cur_market, instrument_array[0]);
 		//推送新行情
 		my_strategy->TradeOnMarketData(cur_market, instrument_array[0]);
+		//更新账户权益
+		my_fm->InMarketEquity(cur_market, instrument_array[0]);
 	}
 }
 
@@ -119,5 +122,5 @@ DBReader::~DBReader() {
 		mysql_close(my_db);
 		cout << "Database disconnected!" << endl;
 	}
-	delete my_db, my_strategy, my_dealer;
+	delete my_db, my_strategy, my_dealer, my_fm;
 }

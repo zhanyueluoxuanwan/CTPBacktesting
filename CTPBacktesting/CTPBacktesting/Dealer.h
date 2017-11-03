@@ -8,6 +8,8 @@
 #include <algorithm>
 using namespace std;
 
+extern map<string, vector<int>> net_pos;
+
 class Dealer {
 public:
 	Dealer(vector<string> &instrument_array);													

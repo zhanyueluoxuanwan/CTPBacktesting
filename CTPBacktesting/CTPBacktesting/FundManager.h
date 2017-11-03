@@ -6,12 +6,16 @@
 #include "TraderInfo.h"
 #include "BacktestParam.h"
 
+extern map<string, vector<int>> net_pos;
+
 class FundManager {
 public:
 	FundManager();
 	virtual ~FundManager();
+	void InTradeEquity(MyTrade *trade);															//成交中，更新账户信息
+	void InMarketEquity(map<string, vector<FT_DATA>> &market_data, string InstrumentID);		//按照市价计算权益
 private:
-	double available_money;		//可用资金，初始化100W
-	double floating_money;		//动态权益
-	map<string, int> net_pos;	//净持仓
+	double available_money;					//可用资金，初始化100W
+	double floating_interest;				//动态权益
+	vector<pair<double, double>> equity;	//全时间序列的动态权益，用于显示效果
 };

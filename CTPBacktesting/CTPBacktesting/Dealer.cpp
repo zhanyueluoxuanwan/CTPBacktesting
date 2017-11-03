@@ -64,6 +64,7 @@ void Dealer::OrderAction() {
 //第一版保守判断，按照对价成交
 void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
 	size_t cur_idx = market_data[InstrumentID].size() - 1;
+	int pos_change = 0;
 	for (map<int, ORDER>::iterator order = ctp_order[InstrumentID].begin(); order != ctp_order[InstrumentID].end();) {
 		if (order->second.direction=='0' && order->second.price >= market_data[InstrumentID][cur_idx].ask1 || order->second.direction == '1' && order->second.price <= market_data[InstrumentID][cur_idx].bid1) {
 			//当前报单可以成交，做个假单子
@@ -71,6 +72,7 @@ void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string Instrument
 			my_trade->Price = order->second.direction == '0' ? min(order->second.price, market_data[InstrumentID][cur_idx].ask1) : max(order->second.price, market_data[InstrumentID][cur_idx].bid1);
 			my_trade->Direction = order->second.direction;
 			my_trade->Volume = order->second.volume;
+			pos_change += (order->second.direction == '0' ? 1 : -1);
 			my_strategy->UpdateOnRtnTrade(my_trade);	
 			my_strategy->OnRtnTrade(my_trade);
 			ctp_order[InstrumentID].erase(order++);
@@ -79,4 +81,6 @@ void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string Instrument
 			order++;
 		}
 	}
+	//更新净持仓
+	net_pos[InstrumentID].push_back(net_pos[InstrumentID][net_pos[InstrumentID].size() - 1] + pos_change);
 }
