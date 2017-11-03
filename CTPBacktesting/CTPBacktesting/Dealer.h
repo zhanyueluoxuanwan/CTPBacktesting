@@ -19,4 +19,5 @@ private:
 	map<string, map<int, ORDER>> ctp_order;		//伪造的交易所队列，用合约列表和报单编号做双重索引
 	thread LittleDealer;						//报单转移线程
 	MyTrade *my_trade;							//伪造的成交单
+	MyOrder *my_order;							//伪造的报单
 };

@@ -12,4 +12,4 @@
 #define DB_ADDR "localhost"
 #define DB_NAME "future_data"
 #define DB_USER "root"
-#define DB_PWD "123456"
+#define DB_PWD  "123456"
