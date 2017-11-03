@@ -163,6 +163,7 @@
     <ClCompile Include="CTPBacktesting.cpp" />
     <ClCompile Include="DBReader.cpp" />
     <ClCompile Include="Dealer.cpp" />
+    <ClCompile Include="FundManager.cpp" />
     <ClCompile Include="MyStrategy.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

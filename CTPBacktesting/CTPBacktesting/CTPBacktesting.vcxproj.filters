@@ -74,6 +74,9 @@
     <ClCompile Include="Dealer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FundManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="libmysql.dll">

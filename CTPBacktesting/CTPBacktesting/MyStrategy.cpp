@@ -17,15 +17,25 @@ void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, st
 		cout << "Buy rb1801 contract!" << endl;
 		ORDER new_order;
 		new_order.id = InstrumentID;
-		new_order.price = 3500;
+		new_order.price = 3600;
 		cout << "Open price is: " << new_order.price << endl;
 		new_order.direction = BID;				//买
 		new_order.type = TYPE_OPEN;				//开仓
 		new_order.order_type = ORDER_COMMIT;	//报单
 		new_order.volume = 1;					//数量
 		CommitOrder(new_order);
-		pos = 1;
+//		pos = 1;
 	}
+	/*
+	else if (pos = 1) {		//测试撤单
+		cout << "Cancel current order!" << endl;
+		ORDER new_order;
+		new_order.id = InstrumentID;
+		new_order.order_type = ORDER_CANCEL;
+		CancelOrder(new_order);
+		pos = 0;
+	}
+	*/
 }
 
 //处理报单回报
@@ -36,25 +46,25 @@ void MyStrategy::OnRtnOrder(MyOrder *order) {
 	else {
 		cout << "=========报单接收=========" << endl;
 		cout << "Order submitted! Order ID: " << order->OrderSysID << endl;
-		cout << "FrontID is: " << order->FrontID
-			<< " SessionID is: " << order->SessionID
-			<< " OrderRef is: " << order->OrderRef
-			<< " Order direction: " << order->Direction
-			<< " Order status: " << order->OrderStatus
-			<< " Order status message: " << order->StatusMsg
-			<< " MinVolume " << order->MinVolume
-			<< endl;
+		cout << "FrontID is: " << order->FrontID << endl;
+		cout << "SessionID is: " << order->SessionID << endl;
+		cout << "OrderRef is: " << order->OrderRef << endl;
+		cout << "Order direction: " << order->Direction << endl;
+		cout << "Order status: " << order->OrderStatus << endl;
+		cout << "Order status message: " << order->StatusMsg << endl;
+		cout << "MinVolume: " << order->MinVolume << endl;
+			
 	}
 }
 
 //处理成交回报
 void MyStrategy::OnRtnTrade(MyTrade *trade) {
 	cout << "=========成交返回=========" << endl;
-	cout << "InstrumentID is: " << trade->InstrumentID
-		<< " Price is: " << trade->Price
-		<< " Volume is: " << trade->Volume
-		<< " Order direction: " << trade->Direction
-		<< endl;
+	cout << "InstrumentID is: " << trade->InstrumentID << endl;
+	cout << "Price is: " << trade->Price << endl;
+	cout << "Volume is: " << trade->Volume << endl;
+	cout << "Order direction: " << trade->Direction << endl;
+		
 	
 }
 
