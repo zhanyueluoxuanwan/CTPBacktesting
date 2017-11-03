@@ -16,6 +16,9 @@
     <Filter Include="mysql">
       <UniqueIdentifier>{97f35072-96e6-48a0-a120-b8ca39f38445}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CTP Api">
+      <UniqueIdentifier>{17fcd6e6-159e-4bc8-987b-54efd6be474b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -42,6 +45,18 @@
     <ClInclude Include="BacktestParam.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="win64api\ThostFtdcMdApi.h">
+      <Filter>CTP Api</Filter>
+    </ClInclude>
+    <ClInclude Include="win64api\ThostFtdcTraderApi.h">
+      <Filter>CTP Api</Filter>
+    </ClInclude>
+    <ClInclude Include="win64api\ThostFtdcUserApiDataType.h">
+      <Filter>CTP Api</Filter>
+    </ClInclude>
+    <ClInclude Include="win64api\ThostFtdcUserApiStruct.h">
+      <Filter>CTP Api</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -56,15 +71,38 @@
     <ClCompile Include="DBReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Dealer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="libmysql.dll">
       <Filter>mysql</Filter>
+    </None>
+    <None Include="win64api\error.dtd">
+      <Filter>CTP Api</Filter>
+    </None>
+    <None Include="win64api\thostmduserapi.dll">
+      <Filter>CTP Api</Filter>
+    </None>
+    <None Include="win64api\thosttraderapi.dll">
+      <Filter>CTP Api</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="libmysql.lib">
       <Filter>mysql</Filter>
     </Library>
+    <Library Include="win64api\thostmduserapi.lib">
+      <Filter>CTP Api</Filter>
+    </Library>
+    <Library Include="win64api\thosttraderapi.lib">
+      <Filter>CTP Api</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="win64api\error.xml">
+      <Filter>CTP Api</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
