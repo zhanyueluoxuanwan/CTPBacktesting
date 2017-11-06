@@ -13,6 +13,7 @@ void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, st
 		<< " Bid Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1
 		<< endl;
 	//≤‚ ‘±®µ•
+	/*
 	if (pos == 0) {
 		cout << "Buy rb1801 contract!" << endl;
 		ORDER new_order;
@@ -26,6 +27,7 @@ void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, st
 		CommitOrder(new_order);
 //		pos = 1;
 	}
+	*/
 	/*
 	else if (pos = 1) {		//≤‚ ‘≥∑µ•
 		cout << "Cancel current order!" << endl;

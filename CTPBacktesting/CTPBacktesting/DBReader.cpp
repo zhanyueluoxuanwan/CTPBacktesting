@@ -103,6 +103,8 @@ void DBReader::PlayMarketData() {
 	//推送行情
 	map<string, vector<FT_DATA>> cur_market;	//伪造实时行情
 	cur_market.insert(make_pair(instrument_array[0], vector<FT_DATA>()));
+	net_pos.insert(make_pair(instrument_array[0], vector<int>()));
+	net_pos[instrument_array[0]].push_back(0);
 	for (int i = 0; i < market_data[instrument_array[0]].size(); i++) {
 		cur_market[instrument_array[0]].push_back(market_data[instrument_array[0]][i]);
 		//第一版，先判成交，再进策略
