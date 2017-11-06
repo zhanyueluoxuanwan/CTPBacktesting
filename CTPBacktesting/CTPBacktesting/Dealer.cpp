@@ -62,7 +62,7 @@ void Dealer::OrderAction() {
 }
 
 //判成交
-//第一版保守判断，按照对价成交
+//第一版保守判断，按照对价成交，只算净持仓
 void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
 	size_t cur_idx = market_data[InstrumentID].size() - 1;
 	int cur_pos = net_pos[InstrumentID][net_pos[InstrumentID].size() - 1];
@@ -73,7 +73,7 @@ void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string Instrument
 			my_trade->Price = order->second.direction == '0' ? min(order->second.price, market_data[InstrumentID][cur_idx].ask1) : max(order->second.price, market_data[InstrumentID][cur_idx].bid1);
 			my_trade->Direction = order->second.direction;
 			my_trade->Volume = order->second.volume;
-			my_fm->InTradeEquity(my_trade, cur_pos);
+			my_fm->InTradeEquity(market_data, my_trade, cur_pos);
 			cur_pos += (order->second.direction == '0' ? 1 : -1);
 			my_strategy->UpdateOnRtnTrade(my_trade);
 			my_strategy->OnRtnTrade(my_trade);
@@ -83,6 +83,4 @@ void Dealer::Strike(map<string, vector<FT_DATA>> &market_data, string Instrument
 			order++;
 		}
 	}
-	//更新净持仓
-	net_pos[InstrumentID].push_back(cur_pos);
 }

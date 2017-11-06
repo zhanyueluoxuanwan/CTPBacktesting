@@ -108,12 +108,12 @@ void DBReader::PlayMarketData() {
 	for (int i = 0; i < market_data[instrument_array[0]].size(); i++) {
 		cur_market[instrument_array[0]].push_back(market_data[instrument_array[0]][i]);
 		//第一版，先判成交，再进策略
+		//推送新行情
+		my_strategy->TradeOnMarketData(cur_market, instrument_array[0]);
 		//报单
 		my_dealer->OrderAction();
 		//判成交
 		my_dealer->Strike(cur_market, instrument_array[0]);
-		//推送新行情
-		my_strategy->TradeOnMarketData(cur_market, instrument_array[0]);
 		//更新账户权益
 		my_fm->InMarketEquity(cur_market, instrument_array[0]);
 	}
