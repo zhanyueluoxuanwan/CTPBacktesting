@@ -104,6 +104,6 @@ void FundManager::InMarketEquity(map<string, vector<FT_DATA>> &market_data, stri
 	equity.push_back(cur_equity);
 	interest_diff = 0;
 	net_pos_change = 0;
-	cout << "Current total_interest is: " << cur_equity.total_interest << " Current net pos is: " << net_pos[InstrumentID][net_pos[InstrumentID].size() - 1] << endl;
+	//cout << "Current total_interest is: " << cur_equity.total_interest << " Current net pos is: " << net_pos[InstrumentID][net_pos[InstrumentID].size() - 1] << endl;
 }
 

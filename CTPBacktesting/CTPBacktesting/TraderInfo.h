@@ -75,7 +75,7 @@ typedef struct {
 	double askvol1;
 	double bidvol1;
 	double vol;			//成交量
-	double turnover;	//成交额
+	double interest;	//成交额
 	double holding;		//持仓
 	double upper_limit;	//涨停价
 	double lower_limit;	//跌停价

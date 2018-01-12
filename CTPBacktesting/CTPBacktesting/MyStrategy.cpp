@@ -7,12 +7,13 @@ using namespace std;
 //根据实时行情进行交易
 void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
 	cout << "InstrumentID is：" << InstrumentID 
-//		<< " Market time: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time 
+		<< " Market time: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time 
 		<< " InstrumentID: " << InstrumentID
 		<< " Ask Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].ask1
 		<< " Bid Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1
 		<< endl;
 	//测试成交
+	/*
 	if (pos == 1) {
 		cout << "Buy rb1801 contract!" << endl;
 		ORDER new_order;
@@ -39,6 +40,7 @@ void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, st
 		CommitOrder(new_order);
 		pos = 1;
 	}
+	*/
 	/*
 	else if (pos = 1) {		//测试撤单
 		cout << "Cancel current order!" << endl;
