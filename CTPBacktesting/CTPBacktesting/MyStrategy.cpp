@@ -6,58 +6,47 @@ using namespace std;
 
 //根据实时行情进行交易
 void MyStrategy::TradeOnMarketData(map<string, vector<FT_DATA>> &market_data, string InstrumentID) {
-	cout << "InstrumentID is：" << InstrumentID 
-		<< " Market time: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time 
+	cout << "InstrumentID is：" << InstrumentID
+		<< " Market time: " << setw(22) << market_data[InstrumentID][market_data[InstrumentID].size() - 1].time
 		<< " InstrumentID: " << InstrumentID
-		<< " Ask Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].ask1
-		<< " Bid Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1
+		//<< " Ask Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].ask1
+		//<< " Bid Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1
+		<< " Close Price: " << market_data[InstrumentID][market_data[InstrumentID].size() - 1].close
 		<< endl;
+	if (market_data[InstrumentID].size() % 10 != 0 || market_data[InstrumentID].size() < 2)
+		return;
+
 	//测试成交
-	/*
-	if (pos == 1) {
-		cout << "Buy rb1801 contract!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.price = market_data[InstrumentID][market_data[InstrumentID].size() - 1].ask1;
-		cout << "Buy price is: " << new_order.price << endl;
-		new_order.direction = BID;				//买
-		new_order.type = TYPE_OPEN;				//开仓
-		new_order.order_type = ORDER_COMMIT;	//报单
-		new_order.volume = 1;					//数量
-		CommitOrder(new_order);
-		pos = 0;
-	}
-	else if (pos == 0) {	
-		cout << "Sell rb1801 contract!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.price = market_data[InstrumentID][market_data[InstrumentID].size() - 1].bid1;
-		cout << "Sell price is: " << new_order.price << endl;
-		new_order.direction = ASK;				//卖
-		new_order.type = TYPE_TCLOSE;			//平仓
-		new_order.order_type = ORDER_COMMIT;	//报单
-		new_order.volume = 1;
-		CommitOrder(new_order);
+	if (pos == 0) {
+		cout << "Buy ni1807 contract!" << endl;
+		local_reference = CommitOrder(InstrumentID, market_data[InstrumentID].back().ask1, 1, BID, TYPE_OPEN);
 		pos = 1;
 	}
-	*/
+	else if (pos == 1) {	
+		cout << "Sell ni1807 contract!" << endl;
+		local_reference = CommitOrder(InstrumentID, market_data[InstrumentID].back().bid1, 1, ASK, TYPE_TCLOSE);
+		pos = 0;
+	}
+	//纯测试用中断
+	//int m = 1;
+	//测试撤单
 	/*
-	else if (pos = 1) {		//测试撤单
-		cout << "Cancel current order!" << endl;
-		ORDER new_order;
-		new_order.id = InstrumentID;
-		new_order.order_type = ORDER_CANCEL;
-		CancelOrder(new_order);
+	if (pos == 0) {
+		cout << "Buy ni1807 contract!" << endl;
+		local_reference = CommitOrder(InstrumentID, market_data[InstrumentID].back().bid1 - 20, 1, BID, TYPE_OPEN);
+		pos = 1;
+	}
+	else if (pos == 1) {
+		cout << "Cancel ni1807 contract!" << endl;
+		CancelOrder(InstrumentID, local_reference, front_id, session_id);
 		pos = 0;
 	}
 	*/
 }
 
 //处理报单回报
-//慎用，CTP报单回报功能测试不全
 void MyStrategy::OnRtnOrder(MyOrder *order) {
-	/*
-	if (strcmp(order->OrderSysID, "") == 0 || local_order_queue[atoi(order->OrderSysID)])
+	if (strcmp(order->OrderSysID, "") == 0)
 		cout << "=========报单成功=========" << endl;
 	else {
 		cout << "=========报单接收=========" << endl;
@@ -68,44 +57,21 @@ void MyStrategy::OnRtnOrder(MyOrder *order) {
 		cout << "Order direction: " << order->Direction << endl;
 		cout << "Order status: " << order->OrderStatus << endl;
 		cout << "Order status message: " << order->StatusMsg << endl;
-		cout << "MinVolume: " << order->MinVolume << endl;
-			
+		cout << "MinVolume: " << order->MinVolume << endl;		
 	}
-	*/
+	cout << "Current available money is: " << setprecision(6) << equity.back().available_money
+		<< " total money is: " << setprecision(6) << equity.back().total_interest
+		<< endl;
 }
 
 //处理成交回报
 void MyStrategy::OnRtnTrade(MyTrade *trade) {
-	/*
 	cout << "=========成交返回=========" << endl;
 	cout << "InstrumentID is: " << trade->InstrumentID << endl;
 	cout << "Price is: " << trade->Price << endl;
 	cout << "Volume is: " << trade->Volume << endl;
 	cout << "Order direction: " << trade->Direction << endl;
-		*/
-	
-}
-
-//提交报单
-void MyStrategy::CommitOrder(ORDER &new_order) {
-	order_reference++;
-	sprintf_s(ORDER_REF, "%d", order_reference);
-	strcpy_s(new_order.ORDER_REF, ORDER_REF);
-	order_queue.push_back(new_order);
-	empty_signal.notify_all();
-}
-
-//撤单操作
-void MyStrategy::CancelOrder(ORDER &new_order) {
-	if (local_order_queue.count(order_reference) == 0)
-		cout << "Failed Cancel! No such order!" << endl;
-	else if(!local_order_queue[order_reference])
-		cout << "Failed Cancel! Order has been traded!" << endl;
-	else {
-		strcpy_s(new_order.ORDER_REF, ORDER_REF);
-		new_order.front_id = front_id;
-		new_order.session_id = session_id;
-		order_queue.push_back(new_order);
-		empty_signal.notify_all();
-	}
+	cout << "Current available money is: " << setprecision(6) << equity.back().available_money
+		<< " total money is: " << setprecision(6) << equity.back().total_interest
+		<< endl;
 }

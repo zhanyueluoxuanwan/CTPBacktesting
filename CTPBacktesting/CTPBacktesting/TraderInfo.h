@@ -33,13 +33,33 @@ typedef struct {
 	char direction;						//0买，1卖
 	int volume;							//数量
 	double price;						//价格
-	char type;							//0开，1平，-1先平后开
+	char type;							//具体报单类型(开或者平)
 	TThostFtdcOrderRefType	ORDER_REF;	//报单引用，用于定位单号
 	int strategy_uid;					//用于定位策略
 	int order_type;						//0报单，1撤单
 	int front_id;						//交易前置
 	int session_id;						//当前会话
 }ORDER;
+
+//成本结构
+typedef struct {
+	double bid_cost;		//多仓成本
+	double ask_cost;		//空仓成本
+	double bid_pos;			//多仓数量
+	double ask_pos;			//空仓数量
+	double commission_fee;	//手续费
+}COST;
+
+extern map<string, COST> account_cost;
+
+//账户金额
+typedef struct {
+	double available_money;	//资金余额
+	double total_interest;	//账户动态权益
+}money_unit;
+
+extern vector<money_unit> equity;	//全时间序列的动态权益，用于显示效果
+
 //单子仓位类型
 //测试先用TCLOSE平今仓
 #define TYPE_OPEN	'0'
@@ -101,4 +121,14 @@ extern deque<ORDER> order_queue;
 extern std::condition_variable empty_signal;			//报单队列是否为空
 extern std::mutex mtx;									//全局锁
 
+//报单与撤单全局函数
+extern int CommitOrder(string InstrumentID, double price, int volume, char direction, char type);						//一般报单函数，返回order_reference
+extern void	CancelOrder(string InstrumentID, int order_reference, int front_id, int session_id);						//撤单操作
+
+//全局开仓flag，用于资金计算
+typedef struct {
+	char direction;
+	char type;
+}STRIKE_TYPE;
+extern map<string, STRIKE_TYPE> strike_flag;
 

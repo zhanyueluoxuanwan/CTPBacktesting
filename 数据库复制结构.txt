@@ -1,0 +1,43 @@
+建立下面两个table供测试用：
+CREATE TABLE IF NOT EXISTS `nitick`(
+   `instrumentID` VARCHAR(20) NOT NULL,
+   `future_id` VARCHAR(20) NOT NULL,
+   `time` VARCHAR(40) NOT NULL,
+   `local` VARCHAR(40) NOT NULL,
+   `open` DOUBLE NOT NULL,
+   `high` DOUBLE NOT NULL,
+   `low` DOUBLE NOT NULL,
+   `close` DOUBLE NOT NULL,
+   `ask1` DOUBLE NOT NULL,
+   `bid1` DOUBLE NOT NULL,
+   `askvol1` DOUBLE NOT NULL,
+   `bidvol1` DOUBLE NOT NULL,
+   `vol` DOUBLE NOT NULL,
+   `interest` DOUBLE NOT NULL,
+   `holding` DOUBLE NOT NULL
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `rbtick`(
+   `instrumentID` VARCHAR(20) NOT NULL,
+   `future_id` VARCHAR(20) NOT NULL,
+   `time` VARCHAR(40) NOT NULL,
+   `local` VARCHAR(40) NOT NULL,
+   `open` DOUBLE NOT NULL,
+   `high` DOUBLE NOT NULL,
+   `low` DOUBLE NOT NULL,
+   `close` DOUBLE NOT NULL,
+   `ask1` DOUBLE NOT NULL,
+   `bid1` DOUBLE NOT NULL,
+   `askvol1` DOUBLE NOT NULL,
+   `bidvol1` DOUBLE NOT NULL,
+   `vol` DOUBLE NOT NULL,
+   `interest` DOUBLE NOT NULL,
+   `holding` DOUBLE NOT NULL
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+将csv导入到数据库中：
+load data infile 'C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\nitick.csv' into table nitick fields terminated by ',' lines terminated by '\r\n'; 
+load data infile 'C:\\ProgramData\\MySQL\\MySQL Server 5.7\\Uploads\\rbtick.csv' into table rbtick fields terminated by ',' lines terminated by '\r\n'; 
+
+注：
+从mysql导出的CSV每行的最后一个值无法重新被mysql识别，最好重新用excel打开再保存一次
